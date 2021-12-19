@@ -13,7 +13,7 @@ export default function InputBox(props: InputBoxProps) {
   const { bill, setBill, tip, setTip, numberPeople, setNumberPeople } = props;
 
   const handleChangeBill = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (bill === NaN) setBill(0);
+    if (Number.isNaN(bill)) return setBill(0);
     setBill(Number(event.target.value));
   };
 
@@ -35,7 +35,7 @@ export default function InputBox(props: InputBoxProps) {
   };
 
   const handleChangePeople = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (numberPeople === NaN) setNumberPeople(0);
+    if (Number.isNaN(numberPeople)) return setNumberPeople(0);
     setNumberPeople(Number(event.target.value));
   };
 
