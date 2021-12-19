@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 
 // components
 import InputBox from "./components/InputBox";
@@ -10,6 +10,15 @@ const App: FC = () => {
   const [numberPeople, setNumberPeople] = useState<number>(0);
   const [tipAmount, setTipAmount] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
+
+  useEffect((): void => {
+    if (bill === 0 || tip === 0 || numberPeople === 0) {
+      setTipAmount(0);
+      return setTotal(0);
+    }
+    setTipAmount((bill * tip) / numberPeople);
+    setTotal(bill + tipAmount);
+  }, [bill, tip, numberPeople]);
 
   return (
     <div className="w-screen h-screen flex flex-col">
@@ -26,15 +35,7 @@ const App: FC = () => {
             setTip={setTip}
             setNumberPeople={setNumberPeople}
           />
-          <OutputBox
-            bill={bill}
-            tip={tip}
-            numberPeople={numberPeople}
-            tipAmount={tipAmount}
-            total={total}
-            setTipAmount={setTipAmount}
-            setTotal={setTotal}
-          />
+          <OutputBox tipAmount={tipAmount} total={total} />
         </main>
       </div>
     </div>
