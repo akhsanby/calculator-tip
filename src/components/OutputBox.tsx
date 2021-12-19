@@ -1,24 +1,10 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
-
 type OutputBoxProps = {
-  bill: number;
-  tip: number;
-  numberPeople: number;
   tipAmount: number;
-  setTipAmount: Dispatch<SetStateAction<number>>;
   total: number;
-  setTotal: Dispatch<SetStateAction<number>>;
 };
 
 export default function OutputBox(props: OutputBoxProps) {
-  const { bill, tip, numberPeople, tipAmount, setTipAmount, total, setTotal } =
-    props;
-
-  useEffect((): void => {
-    if (bill === 0 || tip === 0 || numberPeople === 0) return setTipAmount(0);
-    setTipAmount((bill * tip) / numberPeople);
-    setTotal(bill + tipAmount);
-  }, [bill, tip, numberPeople, tipAmount]);
+  const { tipAmount, total } = props;
 
   return (
     <div className="bg-[#00474b] ml-1 md:w-64 md:h-64 w-64 h-56 rounded-xl px-5 py-8 flex flex-col justify-between">
